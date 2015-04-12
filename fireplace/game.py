@@ -3,7 +3,7 @@ import random
 from itertools import chain
 from .card import Card, THE_COIN
 from .entity import Entity
-from .enums import CardType, Zone
+from .enums import CardType, PowSubType, Zone
 from .managers import GameManager
 from .utils import CardList
 
@@ -40,12 +40,21 @@ class Game(Entity):
 	def entities(self):
 		return chain([self], self.player1.entities, self.player2.entities)
 
+	def action(self, type, entity, index, target):
+		if type == PowSubType.ATTACK:
+			self._attack(entity, target)
+		else:
+			raise NotImplementedError
+
+	def attack(self, source, target):
+		return self.action(PowSubType.ATTACK, source, -1, target)
+
 	def card(self, id):
 		card = Card(id)
 		self.manager.new_entity(card)
 		return card
 
-	def attack(self, source, target):
+	def _attack(self, source, target):
 		"""
 		Process an attack between \a source and \a target
 		"""
