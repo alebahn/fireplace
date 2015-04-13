@@ -49,6 +49,10 @@ class BaseCard(Entity):
 		self.secret = data.secret
 		self.spellpower = 0
 		self.tags.update(data.tags)
+		self.subcards = []
+		for id in self.data.chooseCards:
+			card = self.game.card(id)
+			card.zone = Zone.SETASIDE
 
 		for event in self.events:
 			if hasattr(data.scripts, event):

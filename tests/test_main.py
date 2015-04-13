@@ -713,7 +713,7 @@ def test_ancient_of_lore():
 	assert len(game.currentPlayer.hand) == 1
 	assert ancient1.cost == 7
 	# Play to draw 2 cards
-	ancient1.play(choose="NEW1_008a")
+	ancient1.play(choose=ancient1.subcards[0]) # "NEW1_008a"
 	assert len(game.currentPlayer.hand) == 2
 	assert game.currentPlayer.hero.health == 30 - 6
 	game.endTurn(); game.endTurn()
@@ -721,7 +721,7 @@ def test_ancient_of_lore():
 	game.currentPlayer.discardHand()
 	ancient2 = game.currentPlayer.give("NEW1_008")
 	# Play to heal hero by 5
-	ancient2.play(target=game.currentPlayer.hero, choose="NEW1_008b")
+	ancient2.play(target=game.currentPlayer.hero, choose=ancient2.subcards[0]) # "NEW1_008b"
 	assert not game.currentPlayer.hand
 	assert game.currentPlayer.hero.health == 30 - 6 + 5
 
@@ -1779,7 +1779,7 @@ def test_mark_of_nature():
 	assert wisp1.atk == 1
 	assert wisp1.health == 1
 	assert not wisp1.taunt
-	mark1.play(target=wisp1, choose="EX1_155a")
+	mark1.play(target=wisp1, choose=mark1.subcards[0]) # "EX1_155a"
 	assert wisp1.atk == 1 + 4
 	assert wisp1.health == 1
 	assert not wisp1.taunt
@@ -1789,7 +1789,7 @@ def test_mark_of_nature():
 	assert wisp2.atk == 1
 	assert wisp2.health == 1
 	assert not wisp2.taunt
-	mark2.play(target=wisp2, choose="EX1_155b")
+	mark2.play(target=wisp2, choose=mark2.subcards[0]) # "EX1_155b"
 	assert wisp2.atk == 1
 	assert wisp2.health == 1 + 4
 	assert wisp2.taunt
