@@ -3858,6 +3858,34 @@ def test_quick_shot_acolyte():
 	assert acolyte.dead
 
 
+def test_avenge():
+	game = prepare_game()
+	avenge = game.player1.give("FP1_020")
+	wisp1 = game.player1.give(WISP)
+	avenge.play()
+	#wisp1.play()
+	game.end_turn()
+
+	stonetusk1 = game.player2.give("CS2_171")
+	#stonetusk1.play()
+	#stonetusk1.attack(wisp1)
+	assert avenge in game.player1.secrets
+	game.end_turn()
+
+	wisp2 = game.player1.give(WISP)
+	boar = game.player1.give("CS2_boar")
+	wisp2.play()
+	boar.play()
+	game.end_turn()
+
+	stonetusk2= game.player2.give("CS2_171")
+	stonetusk2.play()
+	stonetusk2.attack(boar)
+	assert avenge not in game.player1.secrets
+	assert wisp2.atk == 4
+	assert wisp2.health == 3
+
+
 def test_eye_for_eye():
 	game = prepare_game()
 	eye_for_eye1 = game.player1.give("EX1_132")

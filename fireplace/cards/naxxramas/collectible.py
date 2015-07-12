@@ -128,6 +128,19 @@ class FP1_025:
 
 
 ##
+# Secrets
+
+# Avenge
+class FP1_020:
+	events = [
+		Death(FRIENDLY + MINION).on(
+			Buff(RandomSelector(FRIENDLY_MINIONS), "FP1_020e"),
+			Reveal(SELF),
+		zone=Zone.SECRET)
+	]
+
+
+##
 # Weapons
 
 # Death's Bite
